@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>key</title>
+    <script src="lx.js"></script>
+    <script src="base64.js"></script>
+</head>
+<body>
+    <div class="box">
+        <p>
+            <label for="">文本</label> <br />
+            <textarea name="" id="text" cols="30" rows="10"></textarea>
+        </p>
+        <p>key只能输入MD5加密过32位字符</p>
+        <p>
+            <label for="">key</label> <input type="text" id="key">
+        </p>
+        <button onclick="jiami()">加密</button>
+        <button onclick="jiemi()">解密</button><br />
+        <textarea name="" id="keys" cols="30" rows="10"></textarea>
+        <div onclick="aa(this)" style="width:200px; background:#000; height: 200px;">
+            <div onclick="bb(event)" style="width:50px; background:yellow; height: 50px;" id="need_hide"></div>
+        </div>
+        <div>
+            <input type="text" name="" id="inp">
+            <button onclick="btn()"></button>
+        </div>
+    </div>
+    <input type="text" id="txt">
+ 
+    <script type='text/javascript'> 
+        document.onmousedown = function mdClick(event) {
+            var e = event || window.event || arguments.callee.caller.arguments[0];
+            if (e.button == 2 || e.button == 3) {
+                mAlert();
+            }
+        }
+        document.oncontextmenu = new Function("return false;");
+                document.onkeydown = document.onkeyup = document.onkeypress = function(event) {
+            var e = event || window.event || arguments.callee.caller.arguments[0];
+
+            if (e && e.keyCode == 123) {
+                    mAlert();
+                    e.returnValue = false;
+                    return (false);
+            }
+        }
+        function mAlert() {
+            alert("感谢您使用基础支撑平台，禁止一切想操作控制台的行为！！！");
+        }
+    </script> 
+    <script>
+    //字符串截取
+    document.onkeydown = function(e){
+        console.log(e);
+    }
+    function getByteVal(val, max) {
+        var returnValue = '';
+        var byteValLen = 0;
+        for (var i = 0; i < val.length; i++) {
+            if (val[i].match(/[^\x00-\xff]/ig) != null)
+            byteValLen += 2;
+            else
+            byteValLen += 1;
+            if (byteValLen > max)
+            break;
+            returnValue += val[i];
+        }
+        return returnValue;
+    }
+    let text = LX.$('#txt');
+    text.onkeyup = function(){
+        var val=this.value;
+        if(val.replace(/[^\x00-\xff]/g,"**").length>14){
+            this.value=getByteVal(val,14)
+        }
+    };
+    
+
+    
+        function btn(){
+            let text = LX.$('#inp').value;
+            LX.isRegular(text,'photo');
+        }
+        window.onload=function(){
+            LX.isRegular();
+            let time = LX.formatDate(1442978789184);
+            // alert(time);
+            // return;
+            //以下是调用上面的函数
+            console.log(LX.myBrowser())
+            if (LX.myBrowser() == "Chrome") {
+                // alert("我是 Chrome");
+            }
+            if (LX.myBrowser() == "FF") {
+                alert("我是 Firefox");
+            }
+            if (LX.myBrowser() == "Opera") {
+                alert("我是 Opera");
+            }
+            if (LX.myBrowser() == "Safari") {
+                alert("我是 Safari");
+            }
+            if (LX.myBrowser() == "IE55") {
+                alert("我是 IE5.5");
+            }
+            if (LX.myBrowser() == "IE6") {
+                alert("我是 IE6");
+            }
+            if (LX.myBrowser() == "IE7") {
+                alert("我是 IE7");
+            }
+            if (LX.myBrowser() == "IE8") {
+                alert("我是 IE8");
+            }
+            if (LX.myBrowser() == "IE9+") {
+                alert("我是 IE9+");
+            }
+        }
+        function aa(e){
+            alert("父亲");
+        }
+        function bb(e){
+            alert("孩子");
+            console.info(e);
+            LX.stopPropagation(e);
+        }
+        function jiami(){
+            let text = LX.$("#text").value,key = LX.$("#key").value;
+            LX.$("#keys").value = LX.Encryption(key,text);
+        }
+        function jiemi(){
+            let text = LX.$("#text").value;
+            LX.$("#keys").value = LX.UnEncryption(text);
+        }
+        // var key = "f8bb0b13f66e16ba383a7495fce24b4b";
+        // var pwd = "wwy123456";
+        // var keys = "Zjh3OGJ3YmJ5YjAxMGIyYjEzMTM0M2Y1ZjY2NjY2ZWUxMTY2YmJhYTMzODgzM2FhNzc0NDk5NTVmZmNjZWUyMjQ0YmI0NGJiOQ==";
+        // let a = LX.Encryption(key,pwd);
+        // // console.log(a);
+        // let b = LX.UnEncryption(keys);
+        // // console.log(b);
+        console.log('%cRainbow Text ', 'background-image:-webkit-gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );color:transparent;-webkit-background-clip: text;font-size:5em;');
+    </script>
+</body>
+</html>
